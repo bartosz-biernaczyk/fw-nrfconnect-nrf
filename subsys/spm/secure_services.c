@@ -57,6 +57,8 @@ int spm_secure_services_init(void)
 #define FICR_PUBLIC_SIZE        0xA1C
 #define FICR_RESTRICTED_ADDR    (FICR_BASE + 0x130)
 #define FICR_RESTRICTED_SIZE    0x8
+#define UICR_ADDR		(NRF_UICR_S_BASE)
+#define UICR_SIZE		(0x1000)
 
 struct read_range {
 	u32_t start;
@@ -76,6 +78,8 @@ int spm_request_read(void *destination, u32_t addr, size_t len)
 		 .size = FICR_PUBLIC_SIZE},
 		{.start = FICR_RESTRICTED_ADDR,
 		 .size = FICR_RESTRICTED_SIZE},
+		{.start = UICR_ADDR,
+		 .size = UICR_SIZE},
 	};
 
 	if (destination == NULL || len <= 0) {
